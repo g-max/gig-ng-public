@@ -1,10 +1,10 @@
 # Altar.io Angular FrontEnd Exercise 0619 (Do not fork)
 The candidate should write the solution using Angular framework and it's free to use any patterns, methodologies and styling language.
-You will be creating 2 pages with a couple of interactive widgets. 
+You will be creating 2 pages with a couple of interactive widgets.
 
-The exercise involves creating **2 routes**: 
-- /generator/ 
--  /payments/ 
+The exercise involves creating **2 routes**:
+- /generator/
+-  /payments/
 
 ## Steps
 1. **Clone** the project to your GitHub account **[DO NOT FORK]**
@@ -37,19 +37,19 @@ In this page you have a **button** to start the “generator”. After clicking 
 
 If you also find an optional **input** field which allows the user to enter an alphabetic character (a-z) and this character will be used as a weight constant of 20% when filling the grid, like so: If a character is entered and it’s a **“z”**, means that 20% of the grid cells will be filled with **“z”** and the remaining ones with random characters.
 
-The user is only allowed to enter a character **once every 4 seconds**, i.e. user cannot type repeatedly a random character. 
+The user is only allowed to enter a character **once every 4 seconds**, i.e. user cannot type repeatedly a random character.
 
 There is a display field underneath the table with the **2 digit code**.
 To populate this field, the following trivial **algorithm** needs to be followed:
 
 1.  Get the 2 digit seconds from the clock, like so: 12:40:36.
-    
+
 2.  Get the matching grid cell values for the positions [3,6] and [6,3], like so: “v” and “c”.
-    
+
 3.  Count the occurrences of “v” and “c” on the entire grid, like so: v = **7**, c = **9**.
-    
+
 4.  If the count is larger than 9, divide the count by the lowest integer possible in order to get a value lower or equal to 9. *roundup the result if decimal.
-    
+
 5.  Done! That is your code: **79**
 
 Every 2 seconds the grid needs to be refreshed and a different code will be generated.
@@ -65,9 +65,3 @@ Every entry on the grid will have the current code assigned to it, together with
 This payments list should be ready to be saved to an **API**.
 
 The user should be able to **navigate** between the 2 pages whilst not losing any information i.,e., still see the payments list.
-
-
-    
-
-
-
