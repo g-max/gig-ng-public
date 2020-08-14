@@ -1,0 +1,16 @@
+:host {
+
+  > div {
+    height: 48px;
+    width: 350px;
+    margin: auto;
+    border-style: solid;
+    border-radius: 3px;
+    border-width: thin;
+    padding-top: 14px;
+  }
+
+  .code {
+    font-weight: bold;
+  }
+}

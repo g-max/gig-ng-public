@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription, Subject } from 'rxjs';
 import { Chance } from 'chance';
+import { TimerService } from './timer.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class GeneratorService {
 
   private readonly charDictionary = 'abcdefghijklmnopqrstuvwxyz';
 
-  private readonly preferredCharWeight = 0.2;
+  private readonly preferredCharWeight = 0.8;
 
   // probability of other characters when preferred char is defined
   // (100% - 20%) divided between 25 characters that left
@@ -23,21 +24,37 @@ export class GeneratorService {
 
   generatedMatrix$ = new BehaviorSubject<string[][]>(this.generatedMatrix);
 
-  constructor() {
+  private preferredChar = ' ';
+
+  timerSub: Subscription = new Subscription();
+
+  constructor(
+    private timerService: TimerService
+  ) {
     this.generatedMatrix = new Array(this.matrixWidth).fill('').map(
       _ => new Array(this.martrixHeight).fill('')
     );
-
     this.generatedMatrix$.next(this.generatedMatrix);
   }
 
-  generateRandomMatrix(preferredChar?: string) {
+  subscribeToTimer() {
+    if (this.timerSub) {
+      this.timerSub.unsubscribe();
+      this.timerSub = null;
+    }
+
+    this.timerSub = this.timerService.timer$.subscribe(
+      _ => { this.generateRandomMatrix(); }
+    );
+  }
+
+  generateRandomMatrix() {
     const chanceObj = new Chance();
-    const preferredCharPos = this.charDictionary.indexOf(preferredChar);
+    const preferredCharPos = this.charDictionary.indexOf(this.preferredChar);
     this.generatedMatrix.forEach((row, rowIdx) => {
       row.forEach((_, colIdx) => {
 
-        if (!preferredChar) {
+        if (!this.preferredChar) {
           this.generatedMatrix[rowIdx][colIdx] = chanceObj.character({ alpha: true, casing: 'lower' });
           return;
         }
@@ -52,6 +69,10 @@ export class GeneratorService {
     });
 
     this.generatedMatrix$.next(this.generatedMatrix);
+  }
+
+  setPreferredChar(preferredChar) {
+    this.preferredChar = preferredChar;
   }
 
 }

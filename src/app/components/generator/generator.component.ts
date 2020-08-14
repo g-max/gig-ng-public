@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { GeneratorService } from 'src/app/services/generator.service';
+import { BehaviorSubject, Subscription, Observable } from 'rxjs';
+
+import { GeneratorService } from '../../services/generator.service';
+import { TimerService } from '../../services/timer.service';
+import { CodeService } from 'src/app/services/code.service';
 
 @Component({
   selector: 'app-generator',
@@ -9,20 +12,38 @@ import { GeneratorService } from 'src/app/services/generator.service';
 })
 export class GeneratorComponent implements OnInit {
 
-  generatedArray: Observable<string[][]>;
+  generatedArray: BehaviorSubject<string[][]>;
 
   char = '';
 
+  code = '';
+
+  matrixGenerated = false;
+
+  timerSubscription: Subscription = new Subscription();
+
   constructor(
-    private generatorService: GeneratorService
+    private generatorService: GeneratorService,
+    private timerService: TimerService,
+    private codeService: CodeService
   ) { }
 
   ngOnInit() {
     this.generatedArray = this.generatorService.generatedMatrix$;
+    this.codeService.code$.subscribe(
+      code => this.code = code
+    );
   }
 
   generateGrid() {
-    this.generatorService.generateRandomMatrix(this.char);
+    this.timerService.startTimer();
+    this.generatorService.setPreferredChar(this.char);
+    this.generatorService.subscribeToTimer();
+    this.codeService.subscribeToTimer();
+    this.matrixGenerated = true;
   }
 
+  onPreferredCharBlur() {
+    this.generatorService.setPreferredChar(this.char);
+  }
 }

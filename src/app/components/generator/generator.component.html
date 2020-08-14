@@ -1,7 +1,9 @@
 <div class="controls">
   <div class="charcter-container">
     <label for="character-input">Character</label>
-    <input type="text" placeholder="Character" id="character-input" [(ngModel)]="char"/>
+    <input type="text" placeholder="Character"
+      id="character-input" [(ngModel)]="char"
+      (blur)="onPreferredCharBlur()"/>
   </div>
   <div  class="grid-container">
     <button (click)="generateGrid()">GENERATE 2D GRID</button>
@@ -21,6 +23,6 @@
   </table>
 </div>
 
-<div class="results-container">
-  HERE BE RESULTS
+<div class="code-container" *ngIf="matrixGenerated">
+  <app-code [code]="code"></app-code>
 </div>
