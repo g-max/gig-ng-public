@@ -29,17 +29,14 @@ export class GeneratorComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.generatedArray = this.generatorService.generatedMatrix$;
-    this.codeService.code$.subscribe(
-      code => this.code = code
-    );
+
   }
 
   generateGrid() {
     this.generatorService.setPreferredChar(this.char);
     this.timerService.startTimer();
     this.generatorService.subscribeToTimer();
-    this.codeService.subscribeToTimer();
+    this.codeService.subscribeToTimerAndGenerator();
     this.matrixGenerated = true;
   }
 

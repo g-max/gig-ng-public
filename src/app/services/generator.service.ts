@@ -14,7 +14,7 @@ export class GeneratorService {
 
   private readonly charDictionary = 'abcdefghijklmnopqrstuvwxyz';
 
-  private readonly preferredCharWeight = 0.8;
+  private readonly preferredCharWeight = 0.2;
 
   // probability of other characters when preferred char is defined
   // (100% - 20%) divided between 25 characters that left
@@ -25,6 +25,8 @@ export class GeneratorService {
   generatedMatrix$ = new BehaviorSubject<string[][]>(this.generatedMatrix);
 
   private preferredChar = ' ';
+
+  secondsArrSub: Subscription = new Subscription();
 
   timerSub: Subscription = new Subscription();
 
@@ -38,12 +40,11 @@ export class GeneratorService {
   }
 
   subscribeToTimer() {
-    if (this.timerSub) {
-      this.timerSub.unsubscribe();
-      this.timerSub = null;
-    }
+    this.unsubscribeFromAll();
 
-    this.timerSub = this.timerService.timer$.subscribe(
+    this.timerSub = this.timerService.timer$.subscribe();
+
+    this.secondsArrSub = this.timerService.secondsArray$.subscribe(
       _ => this.generateRandomMatrix()
     );
   }
@@ -74,6 +75,18 @@ export class GeneratorService {
 
   setPreferredChar(preferredChar) {
     this.preferredChar = preferredChar;
+  }
+
+  private unsubscribeFromAll() {
+    if (this.secondsArrSub) {
+      this.secondsArrSub.unsubscribe();
+      this.secondsArrSub = null;
+    }
+
+    if (this.timerSub) {
+      this.timerSub.unsubscribe();
+      this.timerSub = null;
+    }
   }
 
 }

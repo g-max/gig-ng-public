@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { CodeService } from '../../services/code.service';
 @Component({
   selector: 'app-code',
   templateUrl: './code.component.html',
@@ -6,8 +7,8 @@ import { Component, Input } from '@angular/core';
 })
 export class CodeComponent {
 
-  @Input() code = '';
-
   constructor(
+    private codeService: CodeService
   ) { }
+
 }

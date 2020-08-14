@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { GeneratorService } from './generator.service';
 import { TimerService } from './timer.service';
-import { Subject, Subscription } from 'rxjs';
+import { Subject, Subscription, combineLatest } from 'rxjs';
+import { skip, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -17,16 +18,18 @@ export class CodeService {
     private timerService: TimerService
   ) {  }
 
-  subscribeToTimer() {
+  subscribeToTimerAndGenerator() {
     if (this.timerSub) {
       this.timerSub.unsubscribe();
       this.timerSub = null;
     }
 
-    this.timerSub = this.timerService.secondsArray$.subscribe(
-      seconds => {
-        console.log(seconds, this.generatorService.generatedMatrix$.getValue());
-        this.generateCode(seconds, this.generatorService.generatedMatrix$.value);
+    this.timerSub = combineLatest(
+      this.timerService.secondsArray$,
+      this.generatorService.generatedMatrix$
+    ).subscribe(
+      ([seconds, martrix]) => {
+        this.generateCode(seconds, martrix);
       }
     );
   }
@@ -34,9 +37,6 @@ export class CodeService {
   generateCode(positions, matrix) {
     const firstChar = matrix[positions[0]][positions[1]];
     const secondChar = matrix[positions[1]][positions[0]];
-
-    console.log(firstChar, secondChar);
-
 
     let firstCharOccurrencesNum = 0;
     let secondCharOccurrencesNum = 0;
@@ -48,8 +48,17 @@ export class CodeService {
       });
     });
 
+
     console.log(firstCharOccurrencesNum, secondCharOccurrencesNum);
+    firstCharOccurrencesNum = this.lowerNumber(firstCharOccurrencesNum);
+    secondCharOccurrencesNum = this.lowerNumber(secondCharOccurrencesNum);
     this.code$.next(`${firstCharOccurrencesNum}${secondCharOccurrencesNum}`);
+  }
+
+  private lowerNumber(num) {
+    if (num < 10) { return num; }
+    if (num >= 10 && num < 100) { return Math.floor(num / 10); }
+    if (num === 100) { return Math.floor(num / 100); }
   }
 
 }

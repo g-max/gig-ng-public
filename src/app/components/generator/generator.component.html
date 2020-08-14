@@ -17,7 +17,7 @@
 
 <div class="grid">
   <table>
-    <tr *ngFor="let row of generatedArray | async">
+    <tr *ngFor="let row of generatorService.generatedMatrix$ | async">
       <td *ngFor="let col of row">
         {{col}}
       </td>
@@ -26,5 +26,5 @@
 </div>
 
 <div class="code-container" *ngIf="matrixGenerated">
-  <app-code [code]="code"></app-code>
+  <app-code></app-code>
 </div>

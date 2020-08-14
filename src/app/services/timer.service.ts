@@ -13,9 +13,10 @@ export class TimerService {
 
   secondsArray$: Subject<string[]> = new Subject();
 
-  private timerInterval = 60 * 1000;
+  private timerInterval = 2 * 1000;
 
-  constructor() { }
+  constructor() {
+  }
 
   startTimer() {
     this.timer$ = timer(0, this.timerInterval).pipe(tap(
