@@ -1,0 +1,26 @@
+<div class="controls">
+  <div class="charcter-container">
+    <label for="character-input">Character</label>
+    <input type="text" placeholder="Character" id="character-input" [(ngModel)]="char"/>
+  </div>
+  <div  class="grid-container">
+    <button (click)="generateGrid()">GENERATE 2D GRID</button>
+  </div>
+  <div class="img-container">
+    <img src="../../../assets/web_clock_time.png" class="clock"/>
+  </div>
+</div>
+
+<div class="grid">
+  <table>
+    <tr *ngFor="let row of generatedArray | async">
+      <td *ngFor="let col of row">
+        {{col}}
+      </td>
+    </tr>
+  </table>
+</div>
+
+<div class="results-container">
+  HERE BE RESULTS
+</div>
