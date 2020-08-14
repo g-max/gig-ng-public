@@ -36,8 +36,8 @@ export class GeneratorComponent implements OnInit {
   }
 
   generateGrid() {
-    this.timerService.startTimer();
     this.generatorService.setPreferredChar(this.char);
+    this.timerService.startTimer();
     this.generatorService.subscribeToTimer();
     this.codeService.subscribeToTimer();
     this.matrixGenerated = true;

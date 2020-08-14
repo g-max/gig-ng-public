@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription, Subject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Chance } from 'chance';
 import { TimerService } from './timer.service';
 
@@ -44,13 +44,14 @@ export class GeneratorService {
     }
 
     this.timerSub = this.timerService.timer$.subscribe(
-      _ => { this.generateRandomMatrix(); }
+      _ => this.generateRandomMatrix()
     );
   }
 
   generateRandomMatrix() {
     const chanceObj = new Chance();
     const preferredCharPos = this.charDictionary.indexOf(this.preferredChar);
+
     this.generatedMatrix.forEach((row, rowIdx) => {
       row.forEach((_, colIdx) => {
 
@@ -59,11 +60,11 @@ export class GeneratorService {
           return;
         }
 
-        const weghtsArray = new Array(this.charDictionary.length).fill(this.nonPreferredCharWeight);
-        weghtsArray[preferredCharPos] = this.preferredCharWeight;
+        const weightsArray = new Array(this.charDictionary.length).fill(this.nonPreferredCharWeight);
+        weightsArray[preferredCharPos] = this.preferredCharWeight;
         this.generatedMatrix[rowIdx][colIdx] = chanceObj.weighted(
           this.charDictionary.split(''),
-          weghtsArray
+          weightsArray
         );
       });
     });

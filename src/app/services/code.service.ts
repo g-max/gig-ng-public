@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GeneratorService } from './generator.service';
 import { TimerService } from './timer.service';
-import { BehaviorSubject, Subscription, combineLatest } from 'rxjs';
-import { skip } from 'rxjs/operators';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -25,35 +24,27 @@ export class CodeService {
       this.timerSub = null;
     }
 
-    combineLatest(
-      this.timerService.secondsArray$,
-      this.generatorService.generatedMatrix$
-    ).subscribe(
-      ([v1, v2]) => {
-        return console.log(v1, v2);
+    this.timerSub = this.timerService.secondsArray$.subscribe(
+      seconds => {
+        this.generateCode(seconds, this.generatorService.generatedMatrix$.value);
       }
     );
-
-    // this.timerSub = this.timerService.secondsArray$.subscribe(
-    //   seconds => this.generateCode(seconds)
-    // );
   }
 
-  generateCode(positions) {
-    const firstChar = this.generatorService.generatedMatrix$.value[positions[0]][positions[1]];
-    const secondChar = this.generatorService.generatedMatrix$.value[positions[1]][positions[0]];
+  generateCode(positions, matrix) {
+    const firstChar = matrix[positions[0]][positions[1]];
+    const secondChar = matrix[positions[1]][positions[0]];
 
     let firstCharOccurrencesNum = 0;
     let secondCharOccurrencesNum = 0;
 
-    this.generatorService.generatedMatrix$.value.forEach(row => row.map(
-      el => {
+    matrix.forEach(row => {
+      row.forEach(el => {
         if (el === firstChar) { firstCharOccurrencesNum++; }
         if (el === secondChar) { secondCharOccurrencesNum++; }
-      }
-    ));
+      });
+    });
 
-    console.log('code service occurences: ', `${firstCharOccurrencesNum}${secondCharOccurrencesNum}`);
     this.code$.next(`${firstCharOccurrencesNum}${secondCharOccurrencesNum}`);
   }
 

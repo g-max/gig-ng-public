@@ -9,11 +9,11 @@ import { tap } from 'rxjs/operators';
 })
 export class TimerService {
 
-  timer$: Observable<number>;
+  timer$: Observable<number> = new Observable();
 
   secondsArray$: Subject<string[]> = new Subject();
 
-  private timerInterval = 10 * 1000;
+  private timerInterval = 60 * 1000;
 
   constructor() { }
 
