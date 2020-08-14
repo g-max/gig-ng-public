@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as moment from 'moment';
 
-import { timer,  Observable, BehaviorSubject, Subject } from 'rxjs';
+import { timer,  Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 @Injectable({

@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { GeneratorComponent } from './components/generator/generator.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 import { CodeComponent } from './components/code/code.component';
+import { LettersOnlyDirective } from './directives/letters-only.directive';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { CodeComponent } from './components/code/code.component';
     GeneratorComponent,
     PaymentsComponent,
     CodeComponent,
+    LettersOnlyDirective,
   ],
   imports: [
     BrowserModule,

@@ -46,4 +46,8 @@ export class GeneratorComponent implements OnInit {
   onPreferredCharBlur() {
     this.generatorService.setPreferredChar(this.char);
   }
+
+  onPreferredCharKeyDown($event) {
+    console.log($event);
+  }
 }

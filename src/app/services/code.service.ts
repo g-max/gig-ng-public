@@ -17,7 +17,6 @@ export class CodeService {
     private timerService: TimerService
   ) {  }
 
-
   subscribeToTimer() {
     if (this.timerSub) {
       this.timerSub.unsubscribe();
@@ -26,6 +25,8 @@ export class CodeService {
 
     this.timerSub = this.timerService.secondsArray$.subscribe(
       seconds => {
+
+        console.log(this.generatorService.generatedMatrix$.observers);
         this.generateCode(seconds, this.generatorService.generatedMatrix$.value);
       }
     );
