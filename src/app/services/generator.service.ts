@@ -7,9 +7,9 @@ import { Chance } from 'chance';
 })
 export class GeneratorService {
 
-  private readonly matrixWidth = 10;
+  readonly matrixWidth = 10;
 
-  private readonly martrixHeight = 10;
+  readonly martrixHeight = 10;
 
   private readonly charDictionary = 'abcdefghijklmnopqrstuvwxyz';
 
