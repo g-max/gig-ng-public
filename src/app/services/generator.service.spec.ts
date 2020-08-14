@@ -28,10 +28,11 @@ describe('GeneratorService', () => {
   it('should generate needed proportion of symbols, when provided', () => {
     const service: GeneratorService = TestBed.get(GeneratorService);
     const numberOfExperiments = 1000000;
+    service.setPreferredChar('a');
 
     const weighedOccurancesArray = new Array(numberOfExperiments).fill(0);
     for (let i = 0; i < numberOfExperiments; i++) {
-      service.generateRandomMatrix('a');
+      service.generateRandomMatrix();
       const genMatrix = service.generatedMatrix$.getValue();
       genMatrix.forEach(row => {
         row.forEach(el => {
