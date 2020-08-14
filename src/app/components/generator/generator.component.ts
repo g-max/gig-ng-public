@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject, Subscription, Observable } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { GeneratorService } from '../../services/generator.service';
 import { TimerService } from '../../services/timer.service';
@@ -47,7 +47,4 @@ export class GeneratorComponent implements OnInit {
     this.generatorService.setPreferredChar(this.char);
   }
 
-  onPreferredCharKeyDown($event) {
-    console.log($event);
-  }
 }

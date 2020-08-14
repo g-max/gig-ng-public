@@ -4,7 +4,6 @@
     <input type="text" placeholder="Character"
       id="character-input" [(ngModel)]="char"
       (blur)="onPreferredCharBlur($event)"
-      (keydown)="onPreferredCharKeyDown($event)"
       maxlength="1"
       appLettersOnly/>
   </div>

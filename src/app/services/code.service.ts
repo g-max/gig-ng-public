@@ -25,8 +25,6 @@ export class CodeService {
 
     this.timerSub = this.timerService.secondsArray$.subscribe(
       seconds => {
-
-        console.log(this.generatorService.generatedMatrix$.observers);
         this.generateCode(seconds, this.generatorService.generatedMatrix$.value);
       }
     );

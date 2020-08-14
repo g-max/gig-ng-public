@@ -1,20 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
-// import { GeneratorService } from '../../services/generator.service';
-
+import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-code',
   templateUrl: './code.component.html',
   styleUrls: ['./code.component.scss']
 })
-export class CodeComponent implements OnInit {
+export class CodeComponent {
 
   @Input() code = '';
 
   constructor(
-    // generatorService: GeneratorService
   ) { }
-
-  ngOnInit() {
-  }
-
 }

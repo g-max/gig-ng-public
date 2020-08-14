@@ -1,4 +1,9 @@
-import { Directive, ElementRef, OnInit, HostListener } from '@angular/core';
+import {
+  Directive,
+  ElementRef,
+  OnInit,
+  HostListener
+} from '@angular/core';
 
 @Directive({
   selector: '[appLettersOnly]'
@@ -28,7 +33,6 @@ export class LettersOnlyDirective implements OnInit {
     if (next && !String(next).match(this.regex)) {
       event.preventDefault();
     }
-
   }
 
 }
