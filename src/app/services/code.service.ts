@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
 import { GeneratorService } from './generator.service';
 import { TimerService } from './timer.service';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CodeService {
 
-  code$: BehaviorSubject<string> = new BehaviorSubject('');
+  code$: Subject<string> = new Subject();
 
   timerSub = new Subscription();
 
@@ -25,6 +25,7 @@ export class CodeService {
 
     this.timerSub = this.timerService.secondsArray$.subscribe(
       seconds => {
+        console.log(seconds, this.generatorService.generatedMatrix$.getValue());
         this.generateCode(seconds, this.generatorService.generatedMatrix$.value);
       }
     );
@@ -33,6 +34,9 @@ export class CodeService {
   generateCode(positions, matrix) {
     const firstChar = matrix[positions[0]][positions[1]];
     const secondChar = matrix[positions[1]][positions[0]];
+
+    console.log(firstChar, secondChar);
+
 
     let firstCharOccurrencesNum = 0;
     let secondCharOccurrencesNum = 0;
@@ -44,6 +48,7 @@ export class CodeService {
       });
     });
 
+    console.log(firstCharOccurrencesNum, secondCharOccurrencesNum);
     this.code$.next(`${firstCharOccurrencesNum}${secondCharOccurrencesNum}`);
   }
 
