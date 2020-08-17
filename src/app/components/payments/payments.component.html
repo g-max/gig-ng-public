@@ -23,7 +23,7 @@
     </div>
   </div>
 
-  <div class="grid" *ngIf="payments.length > 0">
+  <div class="grid">
     <div class="table-name">PAYMENT LIST</div>
     <table>
       <thead>
@@ -34,7 +34,7 @@
           <th>GRID</th>
         </tr>
       </thead>
-      <tr *ngFor="let row of payments">
+      <tr *ngFor="let row of paymentsProcessingService.payments$ | async">
         <td class="align-left">
           {{ row.payment }}
         </td>
