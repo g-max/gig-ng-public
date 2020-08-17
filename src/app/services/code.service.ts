@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Subject, Subscription, combineLatest } from 'rxjs';
+import { Subject, Subscription, combineLatest, ReplaySubject } from 'rxjs';
 import { skip, distinctUntilChanged } from 'rxjs/operators';
 
 import { GeneratorService } from './generator.service';
@@ -11,7 +11,7 @@ import { TimerService } from './timer.service';
 })
 export class CodeService {
 
-  code$: Subject<string> = new Subject();
+  code$: ReplaySubject<string> = new ReplaySubject();
 
   timerSub = new Subscription();
 

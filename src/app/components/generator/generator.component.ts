@@ -18,8 +18,6 @@ export class GeneratorComponent {
 
   code = '';
 
-  matrixGenerated = false;
-
   timerSubscription: Subscription = new Subscription();
 
   inputCharacterDisabled = true;
@@ -35,7 +33,6 @@ export class GeneratorComponent {
     this.timerService.startTimer();
     this.generatorService.subscribeToTimer();
     this.codeService.subscribeToTimerAndGenerator();
-    this.matrixGenerated = true;
     this.inputCharacterDisabled = false;
   }
 

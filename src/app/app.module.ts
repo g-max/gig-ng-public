@@ -15,7 +15,7 @@ import { LettersOnlyDirective } from './directives/letters-only.directive';
     GeneratorComponent,
     PaymentsComponent,
     CodeComponent,
-    LettersOnlyDirective,
+    LettersOnlyDirective
   ],
   imports: [
     BrowserModule,

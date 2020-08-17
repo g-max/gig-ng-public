@@ -7,9 +7,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentsComponent implements OnInit {
 
+  payment = '';
+
+  amount = null;
+
+  payments: { payment: string, amount: number, code?: string, matrix?: any }[] = [];
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  addPayment() {
+    this.payments.push({ payment: this.payment, amount: this.amount });
+  }
 }

@@ -1,18 +1,3 @@
 <div>
   YOUR CODE: <span class="code">{{ codeService.code$ | async }}</span>
 </div>
-
-
-<label for="payment-input">Payment</label>
-<input type="text" placeholder="Payment"
-  id="payment-input" [(ngModel)]="payment"/>
-
-<label for="amount-input">Amount</label>
-<input type="text" placeholder="Amount"
-  id="amount-input" [(ngModel)]="amount"/>
-
-<a (click)="addPayment()">
-  <button>
-    +ADD
-  </button>
-</a>

@@ -1,0 +1,73 @@
+:host {
+  .controls {
+    width: 50%;
+    min-width: 770px;
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+    height: 100px;
+
+    div {
+      float: left;
+      margin-right: 15px;
+      label {
+        font-size: 10px;
+        text-align: left;
+      }
+      &.add-payment-btn-container {
+        margin-top: 15px;
+        button {
+          height: 34px;
+        }
+      }
+    }
+
+  }
+
+  .grid {
+    width: 50%;
+    min-width: 770px;
+    margin: auto;
+    text-align: center;
+    margin-top: 20px;
+
+    .table-name {
+      text-align: left;
+      margin-bottom: 10px;
+      font-size: 10px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      th,td {
+        height: 48px;
+      }
+
+      td {
+        padding-right: 10px;
+        padding-left: 10px;
+        font-size: 14px;
+      }
+
+      th {
+        border-style: solid;
+        border-width: thin;
+        width: 10%;
+      }
+
+      th:first-child {
+        border-top-left-radius: 3px;
+        width: 70%;
+      }
+
+      th:last-child {
+        border-top-right-radius: 3px;
+      }
+
+      .align-left {
+        text-align: left;
+      }
+    }
+  }
+}

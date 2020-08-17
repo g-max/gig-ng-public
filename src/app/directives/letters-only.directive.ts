@@ -13,7 +13,7 @@ export class LettersOnlyDirective implements OnInit {
   private specialKeys: Array<string> = ['Backspace', 'Home', 'Clear',
     'Control', 'Shift', 'ArrowLeft', 'ArrowLeft'];
 
-  private regex: RegExp;
+  protected regex: RegExp;
 
   constructor(private el: ElementRef) { }
 
