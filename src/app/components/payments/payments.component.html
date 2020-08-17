@@ -15,7 +15,7 @@
     </div>
 
     <div class="add-payment-btn-container">
-      <a (click)="payment && amount && addPayment()">
+      <a #addPaymentBtn (click)="payment && amount && addPayment()">
         <button [disabled]="!(payment && amount)">
           +ADD
         </button>
@@ -45,7 +45,7 @@
           {{ row.code }}
         </td>
         <td>
-          {{ row.matrix }}
+          {{ row.matrix | matrixSize }}
         </td>
       </tr>
     </table>

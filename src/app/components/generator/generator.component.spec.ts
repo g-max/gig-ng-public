@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GeneratorComponent } from './generator.component';
+import { CodeComponent } from '../code/code.component';
 import { FormsModule } from '@angular/forms';
 
 describe('GeneratorComponent', () => {
@@ -9,7 +10,7 @@ describe('GeneratorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GeneratorComponent ],
+      declarations: [ GeneratorComponent, CodeComponent ],
       imports: [ FormsModule ]
     })
     .compileComponents();

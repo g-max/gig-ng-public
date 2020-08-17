@@ -11,8 +11,7 @@ import { PaymentsComponent } from './components/payments/payments.component';
 import { CodeComponent } from './components/code/code.component';
 
 import { LettersOnlyDirective } from './directives/letters-only.directive';
-
-
+import { MatrixTransformPipe } from './pipes/matrix-transform';
 
 @NgModule({
   declarations: [
@@ -20,7 +19,8 @@ import { LettersOnlyDirective } from './directives/letters-only.directive';
     GeneratorComponent,
     PaymentsComponent,
     CodeComponent,
-    LettersOnlyDirective
+    LettersOnlyDirective,
+    MatrixTransformPipe
   ],
   imports: [
     BrowserModule,
