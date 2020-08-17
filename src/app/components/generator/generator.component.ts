@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 import { GeneratorService } from '../../services/generator.service';
@@ -10,7 +10,7 @@ import { CodeService } from 'src/app/services/code.service';
   templateUrl: './generator.component.html',
   styleUrls: ['./generator.component.scss']
 })
-export class GeneratorComponent implements OnInit {
+export class GeneratorComponent {
 
   generatedArray: BehaviorSubject<string[][]>;
 
@@ -22,15 +22,13 @@ export class GeneratorComponent implements OnInit {
 
   timerSubscription: Subscription = new Subscription();
 
+  inputCharacterDisabled = true;
+
   constructor(
     private generatorService: GeneratorService,
     private timerService: TimerService,
     private codeService: CodeService
   ) { }
-
-  ngOnInit() {
-
-  }
 
   generateGrid() {
     this.generatorService.setPreferredChar(this.char);
@@ -38,10 +36,13 @@ export class GeneratorComponent implements OnInit {
     this.generatorService.subscribeToTimer();
     this.codeService.subscribeToTimerAndGenerator();
     this.matrixGenerated = true;
+    this.inputCharacterDisabled = false;
   }
 
-  onPreferredCharBlur() {
+  onPreferredCharChange() {
     this.generatorService.setPreferredChar(this.char);
+    this.inputCharacterDisabled = true;
+    setTimeout(() => this.inputCharacterDisabled = false, 4000);
   }
 
 }

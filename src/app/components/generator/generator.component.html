@@ -3,7 +3,8 @@
     <label for="character-input">Character</label>
     <input type="text" placeholder="Character"
       id="character-input" [(ngModel)]="char"
-      (blur)="onPreferredCharBlur($event)"
+      (ngModelChange)="onPreferredCharChange($event)"
+      [disabled]="inputCharacterDisabled"
       maxlength="1"
       appLettersOnly/>
   </div>
@@ -25,6 +26,6 @@
   </table>
 </div>
 
-<div class="code-container" *ngIf="matrixGenerated">
+<div class="code-container">
   <app-code></app-code>
 </div>
