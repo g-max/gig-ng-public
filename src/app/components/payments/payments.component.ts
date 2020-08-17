@@ -8,10 +8,10 @@ import {
 import {
   fromEvent,
   combineLatest,
-  Subscription
+  Subscription,
 } from 'rxjs';
 
-import { map, take } from 'rxjs/operators';
+import { map, distinctUntilChanged, tap } from 'rxjs/operators';
 
 import { PaymentsProcessingService } from '../../services/payments-processing.service';
 import { CodeService } from '../../services/code.service';
@@ -34,7 +34,7 @@ export class PaymentsComponent implements AfterViewInit {
 
   payments: { payment: string, amount: number, code?: string, matrix?: any }[] = [];
 
-  sub: Subscription = null;
+  codeGeneratorSub: Subscription = null;
 
   @ViewChild('addPaymentBtn') addPaymentBtn: ElementRef;
 
@@ -45,21 +45,29 @@ export class PaymentsComponent implements AfterViewInit {
   ) { }
 
   ngAfterViewInit() {
-    if (this.sub) {
-      this.sub.unsubscribe();
-      this.sub = null;
+    if (this.codeGeneratorSub) {
+      this.codeGeneratorSub.unsubscribe();
+      this.codeGeneratorSub = null;
     }
 
-    this.sub = combineLatest(
+    this.codeGeneratorSub = combineLatest(
       this.codeService.code$,
       this.generatorService.generatedMatrix$,
-      fromEvent(this.addPaymentBtn.nativeElement, 'click'),
+      fromEvent<MouseEvent>(this.addPaymentBtn.nativeElement, 'click'),
     ).pipe(
+      distinctUntilChanged(
+        ([codeBefore, matrixBefore, eventBefore], [codeAfter, matrixAfter, eventAfter]) =>
+          eventBefore.timeStamp === eventAfter.timeStamp
+      ),
       map(
         ([code, matrix]) => {
-          console.log('payments component: ', code, matrix);
+          if (!(code && matrix)) {
+            return;
+          }
           this.matrix = Object.assign({}, matrix);
           this.code = code;
+
+          this.addPayment();
           this.paymentsProcessingService.savePayments(this.payments);
         }
       )
