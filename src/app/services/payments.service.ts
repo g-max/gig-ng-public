@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class PaymentsService {
+export class PaymentsHttpService {
 
   private readonly apiUrl = '';
 

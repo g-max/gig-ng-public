@@ -27,7 +27,7 @@ describe('GeneratorService', () => {
 
   it('should generate needed proportion of symbols, when provided', () => {
     const service: GeneratorService = TestBed.get(GeneratorService);
-    const numberOfExperiments = 1000000;
+    const numberOfExperiments = 10000;
     service.setPreferredChar('a');
 
     const weighedOccurancesArray = new Array(numberOfExperiments).fill(0);
@@ -49,6 +49,6 @@ describe('GeneratorService', () => {
 
     // should be around 20% from readonly preferredCharWeight = 0.2
     expect(expectedAvWeigth).toBeGreaterThan(19.9);
-    expect(expectedAvWeigth).toBeGreaterThan(20.1);
+    expect(expectedAvWeigth).toBeLessThan(20.1);
   });
 });
