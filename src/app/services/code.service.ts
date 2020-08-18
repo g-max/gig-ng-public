@@ -46,10 +46,6 @@ export class CodeService {
     const firstChar = matrix[positions[0]][positions[1]];
     const secondChar = matrix[positions[1]][positions[0]];
 
-    // console.log('positions ', positions);
-    // console.log('matrix', matrix);
-    // console.log('generateCode chars: ', firstChar, secondChar);
-
     let firstCharOccurrencesNum = 0;
     let secondCharOccurrencesNum = 0;
 
@@ -59,9 +55,6 @@ export class CodeService {
         if (el === secondChar) { secondCharOccurrencesNum++; }
       });
     });
-
-
-    // console.log('occur: ', firstCharOccurrencesNum, secondCharOccurrencesNum);
 
     firstCharOccurrencesNum = this.lowerNumber(firstCharOccurrencesNum);
     secondCharOccurrencesNum = this.lowerNumber(secondCharOccurrencesNum);

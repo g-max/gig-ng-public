@@ -13,7 +13,7 @@ export class TimerService {
 
   secondsArray$: Subject<string[]> = new Subject();
 
-  private timerInterval = 20 * 1000;
+  private timerInterval = 2 * 1000;
 
   constructor() {
   }

@@ -57,6 +57,8 @@ export class PaymentsComponent implements AfterViewInit {
     ).pipe(
       distinctUntilChanged(
         ([codeBefore, matrixBefore, eventBefore], [codeAfter, matrixAfter, eventAfter]) =>
+          // ignoring all events that happen due to code or matrix changes, when button
+          // was not pressed
           eventBefore.timeStamp === eventAfter.timeStamp
       ),
       map(
