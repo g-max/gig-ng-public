@@ -1,0 +1,53 @@
+<div class="code-container">
+  <app-code></app-code>
+
+  <div class="controls">
+    <div class="payment-container">
+      <label for="payment-input">Payment</label>
+      <input type="text" placeholder="Payment"
+        id="payment-input" [(ngModel)]="payment"/>
+    </div>
+
+    <div class="amount-container">
+      <label for="amount-input">Amount</label>
+      <input type="number" placeholder="Amount"
+        id="amount-input" [(ngModel)]="amount"/>
+    </div>
+
+    <div class="add-payment-btn-container">
+      <a #addPaymentBtn (click)="payment && amount">
+        <button [disabled]="!(payment && amount)">
+          +ADD
+        </button>
+      </a>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div class="table-name">PAYMENT LIST</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="align-left">NAME</th>
+          <th>AMOUNT</th>
+          <th>CODE</th>
+          <th>GRID</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let row of paymentsProcessingService.payments$ | async">
+        <td class="align-left">
+          {{ row.payment }}
+        </td>
+        <td>
+          {{ row.amount }}
+        </td>
+        <td>
+          {{ row.code }}
+        </td>
+        <td>
+          {{ row.matrix | matrixSize }}
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
